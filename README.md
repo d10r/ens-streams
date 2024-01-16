@@ -13,3 +13,4 @@ RPC=https://eth.llamarpc.com forge test -vv
 ```
 
 The calldata was generated with `get-calldata.sh`.
+If changing that script, make sure to also update the callData values in `ENSOpsForkTest.t.sol`.
