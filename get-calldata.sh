@@ -52,10 +52,10 @@ echo "OPERATION 5: create auto-wrap schedule"
 AW_MGR_ADDR="0x30aE282CF477E2eF28B14d0125aCEAd57Fe1d7a1"
 # same expiry value as in https://github.com/superfluid-finance/widget/blob/master/packages/widget/src/CommandMapper.tsx#L102
 EXPIRY=3000000000
-# 21 days (minimum is 2 days) - keeps the wrapped amount above 200k
-LOWER_LIMIT=1814400
-# 50 days (minimum is 7 days) - keeps the wrapped amount below 500k with monthly top-up
-UPPER_LIMIT=4320000
+# ~20 days (minimum is 2 days) - allows auto-wrap if the balance goes below 200k
+LOWER_LIMIT=1752000
+# ~30 days (minimum is 7 days) - top-up amount of 300k
+UPPER_LIMIT=2628000
 echo "target: $AW_MGR_ADDR"
 echo "function: createWrapSchedule(address superToken, address strategy, address liquidityToken, uint64 expiry, uint64 lowerLimit,  uint64 upperLimit)"
 echo -n "calldata: "
