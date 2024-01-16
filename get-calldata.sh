@@ -10,16 +10,19 @@ USDCX_ADDR="0x1BA8603DA702602A8657980e825A6DAa03Dee93a"
 STEWARDS_SAFE="0xB162Bf7A7fD64eF32b787719335d06B2780e31D1"
 
 echo "OPERATION 1: approve USDCx SuperToken contract to transfer 300k USDC"
-AMOUNT=$(cast to-wei 300000)
+# 300k with 6 decimals
+USDC_AMOUNT=300000000000
 echo "target: $USDC_ADDR"
 echo -n "calldata: "
-cast calldata "approve(address,uint256)" $USDCX_ADDR $AMOUNT
+cast calldata "approve(address,uint256)" $USDCX_ADDR $USDC_AMOUNT
 echo
 
 echo "OPERATION 2: wrap 300k USDC to USDCX"
+# 300k with 18 decimals
+USDCX_AMOUNT=$(cast to-wei 300000)
 echo "target $USDCX_ADDR"
 echo -n "calldata: "
-cast calldata "upgrade(uint256)" $AMOUNT
+cast calldata "upgrade(uint256)" $USDCX_AMOUNT
 echo
 
 echo "OPERATION 3: start flow to Safe with flowrate of 9,863.01369863 / day"
@@ -35,10 +38,11 @@ echo
 echo "OPERATION 4: approve auto-wrap for 5.1M"
 # autowrap addresses, see https://github.com/superfluid-finance/protocol-monorepo/blob/dev/packages/metadata/networks.json
 AW_STRAT_ADDR="0x1D65c6d3AD39d454Ea8F682c49aE7744706eA96d"
-AW_AMOUNT=$(cast to-wei 5100000)
+# 5.1M with 6 decimals
+AW_USDC_AMOUNT=5100000000000
 echo "target: $USDC_ADDR"
 echo -n "calldata: "
-cast calldata "approve(address,uint256)" $AW_STRAT_ADDR $AW_AMOUNT
+cast calldata "approve(address,uint256)" $AW_STRAT_ADDR $AW_USDC_AMOUNT
 echo
 
 echo "OPERATION 5: create auto-wrap schedule"
